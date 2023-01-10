@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 
 import { CreateUserDto} from "./dto/users.dto"
 
+import { LoginAuthDto } from './dto/login-auth.dto';
 @Controller('user')
 export class UsersController {
 
@@ -14,12 +15,20 @@ export class UsersController {
         return res.status(HttpStatus.OK).json(users);
     }
 
-    @Post('/create')
+    @Post('/register')
     async createUser(@Res() res, @Body() createUserDto: CreateUserDto) {
         const user = await this.usersService.createUser(createUserDto);
         return res.status(HttpStatus.OK).json({
             message: 'Usuario creado correctamente',
             user
+        });
+    }
+    @Post('/login')
+    async LoginUser(@Res() res,@Body() loginAuthDto: LoginAuthDto) {
+        const login= await this.usersService.login(loginAuthDto);
+        return res.status(HttpStatus.OK).json({
+            message: 'Usuario Logueado correctamente',
+            login
         });
     }
 

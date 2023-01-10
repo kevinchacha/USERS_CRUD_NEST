@@ -4,9 +4,9 @@ import {
     IsNumber,
     IsOptional,
     IsString,
-    Length,
     Max,
     MaxLength,
+    MinLength,
   } from 'class-validator';
   
   export class CreateUserDto {
@@ -18,8 +18,9 @@ import {
   
     @IsNotEmpty()
     @IsString()
-    @MaxLength(50)
-    readonly apellido: string;
+    @MinLength(4)
+    @MaxLength(12)
+    readonly password: string;
   
     @IsNotEmpty()
     @IsNumber()
